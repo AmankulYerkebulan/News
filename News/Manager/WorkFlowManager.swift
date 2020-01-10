@@ -28,15 +28,40 @@ class WorkFlowManager: NSObject {
     
     //MARK: - GETT Requests
     
-//    func listOfCity(id: String,onCompletion: @escaping ([List]) -> Void) {
-//        
-//        let path = Global.pathFor(key: "country")
-//        print("path:\(path)")
-//        ApiManager.shared.GET(path: path, showIndicator: true, parameters: nil) { (json, error) in
-//            print("json:\(json)")
-//            let data = List(json: json)
-//            onCompletion(data.data ?? [])
-//        }
-//    }
+    func allNews(page: Int,pageSize: Int,showIndicator: Bool,onCompletion: @escaping ([News],Int,Bool) -> Void) {
+        
+        var path = Global.pathFor(key: "allNews")
+        path     = String(format:path,page,pageSize)
+        
+        print("path:\(path)")
+        
+        ApiManager.shared.GET(path: path, showIndicator: showIndicator, parameters: nil) { (json, error) in
+            print("json:\(json)")
+            if json["status"].stringValue == "ok" {
+                let data = News(json: json)
+                onCompletion(data.arrayOfNews ?? [],data.totalOfNews,true)
+            } else {
+                onCompletion([],0,false)
+            }
+        }
+    }
+    
+    func topNews(page: Int,pageSize: Int,showIndicator: Bool,onCompletion: @escaping ([News],Int,Bool) -> Void) {
+        
+        var path = Global.pathFor(key: "topNews")
+        path     = String(format:path,page,pageSize)
+        
+        print("path:\(path)")
+        
+        ApiManager.shared.GET(path: path, showIndicator: showIndicator, parameters: nil) { (json, error) in
+            print("json:\(json)")
+            if json["status"].stringValue == "ok" {
+                let data = News(json: json)
+                onCompletion(data.arrayOfNews ?? [],data.totalOfNews, true)
+            } else {
+                onCompletion([],0,false)
+            }
+        }
+    }
     
 }

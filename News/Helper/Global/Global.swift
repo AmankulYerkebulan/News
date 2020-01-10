@@ -18,24 +18,6 @@ class Global {
         else { return "" }
     }
     
-    //MARK: - Safe area
-    
-    class func sfRegular(size: CGFloat) -> UIFont {
-        return UIFont(name: "SFProDisplay-Regular", size: size)!
-    }
-    
-    class func sfBold(size: CGFloat) -> UIFont {
-        return UIFont(name: "SFProDisplay-Bold", size: size)!
-    }
-    
-    class func sfLight(size: CGFloat) -> UIFont {
-        return UIFont(name: "SFProDisplay-Light", size: size)!
-    }
-    
-    class func sfSemiBold(size: CGFloat) -> UIFont {
-        return UIFont(name: "SFProDisplay-Semibold", size: size)!
-    }
-    
 }
 
 struct ScreenSize
@@ -44,4 +26,13 @@ struct ScreenSize
     static let SCREEN_HEIGHT        = UIScreen.main.bounds.size.height
     static let SCREEN_MAX_LENGTH    = max(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
     static let SCREEN_MIN_LENGTH    = min(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+}
+
+struct Constant {
+    
+    static let news      = "News"
+    static let top       = "TOP News"
+    static let favorite  = "Favourites"
+    
+    static let pageSize  = 15
 }

@@ -11,6 +11,7 @@ class StoreManager: NSObject {
     //MARK: - Keys
     
     private let DISKCONFIGURATIONKEY    = "DISKCONFIGURATIONKEY"
+    private let NEWS                    = "NEWS"
 
     // MARK: - Public functions
     
@@ -44,5 +45,29 @@ class StoreManager: NSObject {
     }
     
     //MARK: - Storage functions
+    
+    func saveNews(data: News,isToDelete: Bool) {
+        if var news = self.getNews() {
+            if isToDelete == true {
+                if news.contains(data) {
+                    if let index = news.index(of: data) {
+                        news.remove(at: index)
+                    }
+                }
+            } else {
+                news.insert(data, at: 0)
+            }
+            try? storage?.setObject(news, forKey: self.NEWS)
+        } else {
+            try? storage?.setObject([data], forKey: self.NEWS)
+        }
+    }
+    
+    func getNews() -> [News]? {
+        if ((try? storage?.object(ofType: [News].self, forKey: self.NEWS)) != nil) {
+            return (try! storage?.object(ofType: [News].self, forKey: self.NEWS))
+        }
+        return nil
+    }
     
 }

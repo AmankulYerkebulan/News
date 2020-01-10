@@ -34,8 +34,6 @@ final class ApiManager {
             SVProgressHUD.show()
         }
         
-        print(path)
-        
         manager.request(path,
                         method: .get,
                         parameters: parameters == nil ? [:] : parameters,
